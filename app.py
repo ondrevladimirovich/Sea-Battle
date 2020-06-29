@@ -1,12 +1,21 @@
 from flask import Flask, render_template, request, jsonify
 import random
 import os
+import sqlite3
+
+def get_db_connection():
+    conn = sqlite3.connect('db/test.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
 app = Flask(__name__)
 
 @app.route('/')
 def main_page():
-    return render_template('index.html')
+    conn = get_db_connection()
+    battles = conn.execute('SELECT * FROM Battles').fetchall()
+    conn.close()
+    return render_template('index.html', battles=battles)
 
 @app.route('/create_new_game')
 @app.route('/create_new_game/')
