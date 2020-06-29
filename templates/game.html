@@ -29,9 +29,9 @@
               <td>{{ i + 1 }}</td>
               {% for field in game['Field1'][i*10:i*10+10] %}
                   {% if i == 0 %}
-                    <td class="bordered" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    <td class="cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
                   {% else %}
-                    <td class="bordered" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    <td class="cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
                   {% endif %}
 	              {% endfor %}
             </tr>
@@ -62,13 +62,21 @@
             {% for i in range(0, 10) %}
             <tr>
               <td>{{ i + 1 }}</td>
-              {% for field in game['Field2'][i*10:i*10+10] %}
+              {% for field in game['Steps1'][i*10:i*10+10] %}
+                {% if field == ' ' %}
+                    {% if i == 0 %}
+                      <td class="cell enemy_cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    {% else %}
+                      <td class="cell enemy_cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    {% endif %}
+                {% else %}
                   {% if i == 0 %}
-                    <td class="bordered" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    <td class="cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
                   {% else %}
-                    <td class="bordered" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    <td class="cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
                   {% endif %}
-	              {% endfor %}
+                {% endif %}
+              {% endfor %}
             </tr>
             {% endfor %}
               
