@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %} Game ID {{ id }} {% endblock %}
+{% block title %} Game ID {{ game['Id'] }} {% endblock %}
 
 {% block content %}
-  {% if id %}
-    <h1>GAME ID {{ id }}</h1>
+  {% if game['Id'] %}
+    <h1>GAME ID {{ game['Id'] }}</h1>
   {% else %}
     <h1>Error! Game with this ID does not exist</h1>
   {% endif %}

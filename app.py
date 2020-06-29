@@ -33,12 +33,24 @@ def main_page():
 @app.route('/create_new_game/')
 def create_new_game():
     id = generate_link()
+    
+    # creating db record of new game
+    conn = get_db_connection()
+    conn.execute("INSERT INTO Battles (Id, Field1, Field2) VALUES ('" + id + "', '0', '0')")
+    conn.commit()
+    conn.close()
+
     return jsonify(id)
 
 # game page
 @app.route('/game/<id>')
 def game_page(id):
-    return render_template('game.html', id=id)
+    # load game state from db
+    conn = get_db_connection()
+    game = conn.execute("SELECT Id, Field1, Field2 FROM Battles WHERE Id = '" + id + "'").fetchone()
+    conn.close()
+
+    return render_template('game.html', game=game)
 
 # server settings
 if __name__ == '__main__':
