@@ -16,6 +16,9 @@ def generate_link():
     hash.update(str(time.time()).encode('utf-8'))
     return hash.hexdigest()[:10]
 
+def make_empty_field():
+    return ' '*100
+
 # flask route starts here
 app = Flask(__name__)
 
@@ -36,7 +39,7 @@ def create_new_game():
     
     # creating db record of new game
     conn = get_db_connection()
-    conn.execute("INSERT INTO Battles (Id, Field1, Field2) VALUES ('" + id + "', '0', '0')")
+    conn.execute("INSERT INTO Battles (Id, Field1, Field2) VALUES ('" + id + "', '" + make_empty_field() + "', '" + make_empty_field() + "')")
     conn.commit()
     conn.close()
 
