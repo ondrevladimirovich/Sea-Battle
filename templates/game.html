@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename= 'css/game.css') }}">
-
 {% block title %} Game ID {{ game['Id'] }} {% endblock %}
 
 {% block content %}
@@ -31,9 +29,9 @@
               <td>{{ i + 1 }}</td>
               {% for field in game['Field1'][i*10:i*10+10] %}
                   {% if i == 0 %}
-                    <td data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    <td class="bordered" data-cell="{{ loop.index0 }}">{{ field }}</td>
                   {% else %}
-                    <td data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    <td class="bordered" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
                   {% endif %}
 	              {% endfor %}
             </tr>
@@ -66,9 +64,9 @@
               <td>{{ i + 1 }}</td>
               {% for field in game['Field2'][i*10:i*10+10] %}
                   {% if i == 0 %}
-                    <td data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    <td class="bordered" data-cell="{{ loop.index0 }}">{{ field }}</td>
                   {% else %}
-                    <td data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    <td class="bordered" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
                   {% endif %}
 	              {% endfor %}
             </tr>

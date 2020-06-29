@@ -1,0 +1,16 @@
+table {
+    border-collapse: collapse;
+}
+
+.bordered {
+    border: 2px solid black;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.bordered:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+}
