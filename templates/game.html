@@ -1,7 +1,90 @@
-<!doctype html>
-<title>Game ID {{ id }}</title>
-{% if id %}
-  <h1>GAME ID {{ id }}</h1>
-{% else %}
-  <h1>Error! Kakoe-to govno s logicoy u avtora</h1>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block title %} Game ID {{ game['Id'] }} {% endblock %}
+
+{% block content %}
+  {% if game['Id'] %}
+    <div id="fields" style="display: inline-flex;">
+      <div>
+        <table id="field1">
+          <thead>
+            <tr>
+            <th></th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+            <th>G</th>
+            <th>H</th>
+            <th>I</th>
+            <th>J</th>
+          </tr>
+          </thead>
+          <tbody>
+
+            {% for i in range(0, 10) %}
+            <tr>
+              <td>{{ i + 1 }}</td>
+              {% for field in game['Field1'][i*10:i*10+10] %}
+                  {% if i == 0 %}
+                    <td class="cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                  {% else %}
+                    <td class="cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                  {% endif %}
+	              {% endfor %}
+            </tr>
+            {% endfor %}
+              
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table id="field2" style="margin-left: 20em;">
+          <thead>
+            <tr>
+            <th></th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+            <th>G</th>
+            <th>H</th>
+            <th>I</th>
+            <th>J</th>
+          </tr>
+          </thead>
+          <tbody>
+
+            {% for i in range(0, 10) %}
+            <tr>
+              <td>{{ i + 1 }}</td>
+              {% for field in game['Steps1'][i*10:i*10+10] %}
+                {% if field == ' ' %}
+                    {% if i == 0 %}
+                      <td class="cell enemy_cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                    {% else %}
+                      <td class="cell enemy_cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                    {% endif %}
+                {% else %}
+                  {% if i == 0 %}
+                    <td class="cell" data-cell="{{ loop.index0 }}">{{ field }}</td>
+                  {% else %}
+                    <td class="cell" data-cell="{{ i }}{{ loop.index0 }}">{{ field }}</td>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+              
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <h1>Error! Game with this ID does not exist</h1>
+  {% endif %}
+{% endblock %}
